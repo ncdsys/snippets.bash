@@ -815,4 +815,7 @@ lscpu
 # L1d cache:             32K
 # L1i cache:             32K
 # L2 cache:             2048K
+##############################################################################
+# running logkeys, tests.
+logkeys -s --no-daemon -o foo --no-func-keys --no-timestamp
 
