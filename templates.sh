@@ -747,4 +747,72 @@ scp -r <user>@<hostname>:<file/folder> <destination>
  
 # ex: scp -r root@tv:/var/www/html ./
 
+##############################################################################
+# run, running, git, in, local, machine.
+git init
+git add *.zip
+git commit -a -m 'Initial commit'
+git remote add reef  edrx@reef:/sda5/hippiegoddess/
+git fetch -v   reef
+git pull
+##############################################################################
+# set time manually.
+# date --set 2015-07-19
+# date --set 12:43:00
+
+sudo bash -i
+date --set <date>
+date --set <time>
+exit
+##############################################################################
+# ascii, art, draw, ascii, letters, bigger.
+
+bash
+figlet -f standard <text> | sed 's/^/# /' 
+##############################################################################
+# making, make, shabang, turn, python, script, executable.
+# making python scripts executable a.k.a shabang them.
+echo '#!/usr/bin/env python' > /tmp/tmpfile
+cat <file> >> /tmp/tmpfile
+cat /tmp/tmpfile > <file>
+##############################################################################
+# install, installing, python, scripts, as ,user.
+
+python2.6 setup.py install --user
+##############################################################################
+# make, build, create, tarball.
+
+tar -cvzf <file.tgz> <folder>
+##############################################################################
+# running X window applications over ssh.
+# Change from /etc/ssh/sshd_config X11Forwarding yes
+ssh -X <user@host>
+##############################################################################
+# capture, capturing screenshots from camera with streamer.
+
+streamer -q -c /dev/video -s 300x400 s  -b 16 -o <file.jpg>
+##############################################################################
+# transform convert png into gif.
+
+convert SMFPress.png -channel Alpha -threshold 80% -resize 120x120 thumbnail.gif
+convert img.png -channel Alpha  thumbnail.gif
+##############################################################################
+# show, view, check, cpu, architecture.
+
+lscpu
+
+# Architecture:          i686
+# CPU op-mode(s):        32-bit, 64-bit
+# CPU(s):                2
+# Thread(s) per core:    1
+# Core(s) per socket:    2
+# CPU socket(s):         1
+# Vendor ID:             GenuineIntel
+# CPU family:            6
+# Model:                 23
+# Stepping:              10
+# CPU MHz:               2493.742
+# L1d cache:             32K
+# L1i cache:             32K
+# L2 cache:             2048K
 
