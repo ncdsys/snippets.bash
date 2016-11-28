@@ -675,5 +675,76 @@ localectl set-locale LANG=<lang>
 # grep -rl --exclude-dir='.git' 'CashRegisterIncomeAndExpenses' ./ | xargs sed -i 's/CashRegisterIncomeAndExpenses/CashRegister/g'
 
 grep -rl  'matchingstring' somedir/ | xargs sed -i 's/string1/string2/g' 
+##############################################################################
+# Run a script during Arch Linux boot process
+# 
+# We will use a systemd service to run our script during boot process of Arch Linux. Create a new file in "/etc/systemd/system" (e.g. myscript.service) and add the following contents:
+
+[Unit]
+Description=My script
+
+[Service]
+ExecStart=/usr/bin/my-script
+
+[Install]
+WantedBy=multi-user.target 
+put your script in "/usr/bin/my-script" and make sure to make it executable. and then enable the service.
+
+sudo chmod 755 /usr/bin/my-script
+sudo systemctl enable myscript.service
+
+##############################################################################
+# read, view, tar, gz, compressed, files.
+
+zless filename
+##############################################################################
+# pip, install, requirements, files.
+
+pip install -r <file>
+##############################################################################
+# fix, i3, su, root, call, startx, after, superuser, sudo, broken, .Xauthority.
+
+# when calling startx as root from i3 it will turn .Xauthority ownership to root.
+
+# in order to fix it just remove .Xauthority* files.
+##############################################################################
+# read, check, view, open, mimeapps, xdg, list, applications, default.
+# view the default applications used to open filetypes based on mimetypes.
+vy ~/.local/share/applications/mimeapps.list
+vy ~/.local/share/applications/desktop-mimeapps.list
+vy ~/.local/share/applications/chrome-app-list.desktop 
+##############################################################################
+
+
+# dzen2, menu.
+
+* Display message and timeout after 10 seconds:
+(echo "This is a message"; sleep 10) | dzen2 -bg darkred -fg grey80 -fn fixed 
+
+
+* Display message and never timeout: with number of lines limited to 3.
+echo 'This is a message e'| dzen2 -p -bg yellow -fg black -l 3
+
+* Display updating single line message:
+    for i in $(seq 1 20); do A=${A}'='; print $A; sleep 1; done | dzen2
+
+
+* Display header and a message with multiple lines:
+    (echo Header; cal; sleep 20) | dzen2 -l 8
+
+    Displays "Header" in the title window and the output of cal in the 8
+    lines high slave window.
+
+
+* Display updating messages:
+    (echo Header; while true; do echo test$((i++)); sleep 1; done) | dzen2 -l 12
+
+    The slave window will update contents if new input has arrived.
+##############################################################################
+# copy remote file to local machine with scp.
+
+scp -r <user>@<hostname>:<file/folder> <destination>
+ 
+# ex: scp -r root@tv:/var/www/html ./
 
 
