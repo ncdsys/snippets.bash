@@ -741,11 +741,15 @@ echo 'This is a message e'| dzen2 -p -bg yellow -fg black -l 3
 
     The slave window will update contents if new input has arrived.
 ##############################################################################
-# copy remote file to local machine with scp.
+# send, directory to host machine with scp.
 
-scp -r <user>@<hostname>:<file/folder> <destination>
+scp -r <folder> <user>@<hostname>:<destination>
  
 # ex: scp -r root@tv:/var/www/html ./
+##############################################################################
+# send, copy file, to, host, machine, scp
+
+scp -P 1022 <file> <user>@<host>:<destination>
 
 ##############################################################################
 # run, running, git, in, local, machine.
@@ -818,4 +822,39 @@ lscpu
 ##############################################################################
 # running logkeys, tests.
 logkeys -s --no-daemon -o foo --no-func-keys --no-timestamp
+##############################################################################
+# find, locate, package, files, pacman, arch.
+
+sudo bash -i
+pacman -Ql <package>
+##############################################################################
+# add, gem, path, PATH, run, executable, ruby.
+
+echo 'PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"' >>~/.bashrc
+##############################################################################
+# add, zip, zipping, password, file, password, security.
+# Testing zip with password.
+
+zip --password MY_SECRET foo.zip foo
+ls
+rm foo
+unzip -P MY_SECRET foo
+ls
+cat foo
+rm foo.zip
+##############################################################################
+# add, zip, zipping, password, file, password, security.
+# Testing zip with password.
+
+zip --password <password> <file.zip> <file>
+##############################################################################
+# unzip, zip, zipping, password, file, password, security.
+# Testing zip with password.
+
+unzip -P <password> <file.zip>
+##############################################################################
+# zip, folder, pack.
+
+zip -r <file.zip> <folder>
+##############################################################################
 
