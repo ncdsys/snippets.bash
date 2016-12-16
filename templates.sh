@@ -858,3 +858,38 @@ unzip -P <password> <file.zip>
 zip -r <file.zip> <folder>
 ##############################################################################
 
+# generate ssh keygen, github ssh-keygen, ssh key
+
+echo '' > ~/.ssh/known_hosts
+
+ssh-keygen -t rsa -C `askpass`
+
+y
+ls -la ~/.ssh/id_rsa
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+vy ~/.ssh/id_rsa.pub
+# Copy the key then add to git hub.
+
+# Test if it is working then input the passphrase.
+ssh -T git@github.com
+
+# take, get, screenshot, imagemagick.
+##############################################################################
+# install imagemagick.
+sudo pacman -S imagemagick
+
+import -window root -quality 100 -silent "/tmp/screenshot-`date +%F[%R]`.jpg"
+
+# take, screenshot, get, after, delay, vy.
+
+sleep 4; import -window root -quality 100 -silent "/tmp/screenshot-`date +%F[%R]`.jpg"
+##############################################################################
+# Get list of last upgraded packages, arch linux.
+# Example:
+# cat /var/log/pacman.log | grep -i -e upgraded | grep i3
+cat /var/log/pacman.log | grep -i -e upgraded | grep <package>
+
+
+
