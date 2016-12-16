@@ -886,10 +886,28 @@ import -window root -quality 100 -silent "/tmp/screenshot-`date +%F[%R]`.jpg"
 
 sleep 4; import -window root -quality 100 -silent "/tmp/screenshot-`date +%F[%R]`.jpg"
 ##############################################################################
-# Get list of last upgraded packages, arch linux.
+# obtain get list of last upgraded packages arch linux.
 # Example:
 # cat /var/log/pacman.log | grep -i -e upgraded | grep i3
 cat /var/log/pacman.log | grep -i -e upgraded | grep <package>
+##############################################################################
+# downgrade undo upgrade arch package
+# Example:
 
+# cat /var/log/pacman.log | grep -i -e upgraded | grep i3
+# cd /var/cache/pacman/pkg/
+# ls | grep i3
+# pacman -U i3-wm-4.12-1-x86_64.pkg.tar.xz
+# y
+# pacman -U i3status-2.10-1-x86_64.pkg.tar.xz
+# y
 
+cd /var/cache/pacman/pkg/
+pacman -U <package>
+
+##############################################################################
+# downgrade all packages arch linux
+pacman -Syy
+
+pacman -Suu
 
