@@ -918,106 +918,22 @@ lsmod
 #load #kernel #module
 modprobe <module>
 ##############################################################################
-
-# install, arch.
-
-loadkeys br-abnt2
-
-# stabilish connection.
-wifi-menu -o wlp2s0
-
-# update time.
-timedatectl set-ntp true
-
-# check if uefi works.
-ls /sys/firmware/efi/efivars
-
-# create a new partition table
-parted /dev/sda
-mklabel gpt
-
-# create UEFI partition.
-mkpart ESP fat32 1MiB 513MiB
-
-# set it as bootable.
-set 1 boot on
-
-# create the partitions, 100% means using the remaining free space.
-mkpart primary linux-swap 513MiB 7GiB
-mkpart primary ext4 7GiB 100%
-
-# format uefi and root.
-mkfs.fat -F32 /dev/sda1
-mkfs.ext4 /dev/sda3
-
-# enable swap partition
-mkswap /dev/sda2
-swapon /dev/sda2
-
-mount /dev/sda3 /mnt
-
-# create a /mnt/boot dir to mount the uefi partition.
-mkdir -p /mnt/boot
-
-# mount uefi partition in /mnt/boot.
-mount /dev/sda1 /mnt/boot
-
-# install the base system.
-pacstrap -i /mnt base base-devel
-
-# generate fstab file.
-genfstab -U /mnt >> /mnt/etc/fstab
-
-# change root
-arch-chroot /mnt /bin/bash
-
-# uncoment en_US.UTF-8 UTF-8 in
-vi /etc/locale.gen
-
-# then 
-locale-gen
-
-localectl list-locales
-localectl set-locale LANG=en_US.UTF-8
-
-# set keyboard permanently.
-# /etc/vconsole.conf
-
-KEYMAP=br-abnt2
-FONT=lat9w-16
-
-# select timezone
-tzselect
-
-ln -s /usr/share/zoneinfo/America/Sao_paulo /etc/localtime
-hwclock --systohc --utc
-
-# install boot loader, grub.
-bootctl install
-
-# set up systemd-boot
-$esp/loader/loader.conf
-default  arch
-timeout  4
-editor   0
-
-# create the entry for the arch.
-$esp/loader/entries/arch.conf
-title          Arch Linux
-linux          /vmlinuz-linux
-initrd         /initramfs-linux.img
-options        root=PARTUUID=value rw
-
-# find the PARTUUID value, it is needed to select the device that
-# was set as root.
-blkid -s PARTUUID -o value /dev/sdxY
-
+# create, user, linux.
+sudo bash -i
+useradd -m -s /bin/bash <user>
+passwd <user>
+cp /etc/X11/xinit/xinitrc /home/<user>/.xinitrc
+# add exec i3 to the file
+vy /home/<user>/.xinitrc 
+chown <user>:<user> /home/<user>/.xinitrc
+exit
 ##############################################################################
-# setup, SUDO_ASPASS, SSH_ASKPASS, variable, environment, run, commands, root, permission.
+# add, permit, user, group, sudo.
+# It adds user to the group sudo.
+# i should figure out more consistent way.
+sudo usermod <user> -a -G sudo
+echo '<user>	ALL=(ALL:ALL) ALL' >> /etc/sudoers
 
-echo 'export SUDO_ASKPASS=askpass' >> ~/.bashrc
-echo 'export SSH_ASKPASS=askpass' >> ~/.bashrc
-##############################################################################
 
 
 
