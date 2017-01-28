@@ -85,8 +85,7 @@ rm -fr dist
 # record, extract, unpack, burn, iso images, to usb, storage, pen drive, record debian iso image.
 sudo bash -i
 
-gparted
-
+fdisk -l
 # format the partition as ntfs.
 cd /home/tau/Downloads
 ls
@@ -213,7 +212,8 @@ fi
 
 sudo bash -i
 fdisk -l
-mount -t ntfs -o rw /dev/sdb1 /media/usb
+mount -o rw /dev/sdb[number] /mnt
+umount /dev/sdb[number]
 exit
 ##############################################################################
 cd /tmp
@@ -1018,5 +1018,6 @@ blkid -s PARTUUID -o value /dev/sdxY
 echo 'export SUDO_ASKPASS=askpass' >> ~/.bashrc
 echo 'export SSH_ASKPASS=askpass' >> ~/.bashrc
 ##############################################################################
+
 
 
