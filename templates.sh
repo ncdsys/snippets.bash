@@ -1002,4 +1002,8 @@ modprobe -r <module>
 
 lsof -i <protocol>:<port>
 ##############################################################################
+# delete, wifi-menu, profiles.
+ls /etc/netctl
+sudo rm /etc/netctl/<profile>
+##############################################################################
 
