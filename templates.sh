@@ -747,9 +747,9 @@ scp -r <folder> <user>@<hostname>:<destination>
  
 # ex: scp -r root@tv:/var/www/html ./
 ##############################################################################
-# send, copy file, to, host, machine, scp
+# transfer, send, copy file, to, host, machine, scp
 
-scp -P 1022 <file> <user>@<host>:<destination>
+scp -P <port> <file> <user>@<host>:<destination>
 
 ##############################################################################
 # run, running, git, in, local, machine.
@@ -774,6 +774,17 @@ exit
 bash
 figlet -f standard <text> | sed 's/^/# /' 
 ##############################################################################
+# comment, listing, files, dir, folder, sed.
+# prepends lines of text with character, sed, SED.
+
+# it calls ls -la which produces output in lines.
+# then it pipes the output to sed that uses 's' which means
+# substitution. It means replace all ^ for the string '# '.
+# the ^ stands for beginning of the line in regex.
+
+ls -la <folder> | sed 's/^/# /'
+##############################################################################
+
 # making, make, shabang, turn, python, script, executable.
 # making python scripts executable a.k.a shabang them.
 echo '#!/usr/bin/env python' > /tmp/tmpfile
@@ -933,7 +944,55 @@ exit
 # i should figure out more consistent way.
 sudo usermod <user> -a -G sudo
 echo '<user>	ALL=(ALL:ALL) ALL' >> /etc/sudoers
+##############################################################################
+# find, all, occurrences, look, pattern.
+
+grep -rl  '<pattern>' <folder>
 
 
+##############################################################################
+# set, setting, change, python, default, prompt.
+
+echo 'import sys; sys.ps1="<token0>\n"; sys.ps2="<token1>\n"' > /home/tau/.set_py_prompt.py
+echo "export PYTHONSTARTUP=/home/tau/.set_py_prompt.py" >> /home/tau/.bashrc
+
+##############################################################################
+# install, get, download, pip, package, specific, version.
+
+sudo pip install <package>==<x.x.x>
+##############################################################################
+# convert, markdown, to, html.
+
+markdown <file.md> >> <file.html>
+##############################################################################
+# create, make, add, group.
+
+groupadd <group>
+cat /etc/group | grep <group>
+##############################################################################
+# create, add, user.
+
+useradd <user> -g <group0,group1,group2,..> -m -s /bin/bash 
+passwd <user>
+##############################################################################
+# modprobe, templates, examples.
+
+# list currently loaded modules in the kernel.
+# kernel modules
+sudo bash -i
+lsmod | less
+##############################################################################
+# add, install new module into the kernel.
+modprobe <module>
+##############################################################################
+# verify whether the module was installed.
+lsmod | grep <module>
+##############################################################################
+# load a new module with a different name into the kernel.
+modprobe <module> -o <new_name>
+##############################################################################
+# unload a module from the linux kernel.
+modprobe -r <module>
+##############################################################################
 
 
