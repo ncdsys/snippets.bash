@@ -225,8 +225,11 @@ tar -zxvf <release>
 mv <release> ~/bin
 ##############################################################################
 # write, text, on, image.
+# example:
+# convert -font Noto-Sans-UI -fill blue -pointsize 40 -draw "text 30,30 'iury'" -draw "text 30,70'com 3 anos'" eubebe.jpg eubebe2.jpg
 
 convert -font helvetica -fill blue -pointsize 40 -draw "text <x0>,<y0> '<text0>'" -draw "text <x1>,<y1> '<text1>'" <input>.jpg <output>.jpg
+
 ##############################################################################
 # install, package, nodejs, npm, global, root, superuser.
 
@@ -1006,4 +1009,11 @@ lsof -i <protocol>:<port>
 ls /etc/netctl
 sudo rm /etc/netctl/<profile>
 ##############################################################################
+# pacman, mirror list file.
+/etc/pacman.d/mirrorlist
+##############################################################################
+# pacman, conf, pacman.conf, file.
+/etc/pacman.conf
+##############################################################################
+
 
