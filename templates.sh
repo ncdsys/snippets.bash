@@ -1019,6 +1019,246 @@ sudo rm /etc/netctl/<profile>
 # pacman, conf, pacman.conf, file.
 /etc/pacman.conf
 ##############################################################################
+# send mail, email, read email, mail.
+
+# install ssmtp on linux, send mail ssmt.
+
+# configuring ssmtp to send email.
+# edit this file.
+
+# mailhub=smtp.gmail.com:587
+# UseSTARTTLS=YES
+# AuthUser=myemail@gmail.com
+# AuthPass=XXXXXXXXXXXXXXX
+# TLS_CA_File=/etc/pki/tls/certs/ca-bundle.crt
+
+# add these lines in the file.
+sudo bash -i
+vy /etc/ssmtp/ssmtp.conf&
+exit
+
+# Sign in to the Gmail web interface.Open the 'Forwarding and POP/IMAP' 
+# tab on your 'Settings' page, and configure IMAP or POP. 
+# After enabling this in Gmail, make sure you click 'Save Changes' so 
+# Gmail can communicate with your mail client. 
+
+# add tau to the group mail, so tau can send mails.
+sudo bash -i
+usermod tau -a -G mail
+exit
+
+ssmtp ioliveira@id.uff.br
+From: "Iury" <ioliveira@id.uff.br>
+To: "Iury" <ioliveira@id.uff.br>
+Subject: First Email
+MIME-Version: 1.0
+Content-Type: text/plain
+
+Hello, World!
 
 
+# mail
+sudo bash -i
+
+sendmail -t
+From: "Iury" <ioliveira@id.uff.br>
+To: "Iury" <ioliveira@id.uff.br>
+Subject: First Email
+MIME-Version: 1.0
+Content-Type: text/plain
+
+Hello, World!
+
+# Press Control-D
+exit
+
+echo 'From: "Iury" <ioliveira@id.uff.br>
+To: "Iury" <ioliveira@id.uff.br>
+Subject: First Email
+MIME-Version: 1.0
+Content-Type: text/plain
+
+Hello, World!
+' >> first_email
+
+sudo bash -i
+cat first_email | sendmail -i -t
+exit
+##############################################################################
+# run python interpreter with tee, it outputs what's sent to the interpreter.
+
+tee >(python -i)
+
+# ignore interruptions/signals.
+tee -i >(python -i)
+##############################################################################
+# check, view, get, list, show, plugged, attached, inserted, device, usb, pen drive.
+sudo bash -i
+cat /var/log/kern.log
+exit
+##############################################################################
+# ftp download example
+
+#!/bin/sh
+HOST='ftp.users.qwest.net'
+USER='yourid'
+PASSWD='yourpw'
+FILE='testdown.html'
+
+ftp -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+get $FILE
+bye
+END_SCRIPT
+##############################################################################
+# ftp upload example
+
+#!/bin/sh
+HOST='yourhostftp.users.qwest.net'
+USER='yourid'
+PASSWD='yourpw'
+FILE='error.log'
+ftp -n $HOST <<END_SCRIPT
+quote USER $USER
+quote PASS $PASSWD
+put $FILE
+bye
+END_SCRIPT
+##############################################################################
+# arrays in posix shell, bash
+
+# Prepare array
+A=; for i in a b c d; do A="$A$i:"; done; echo $A;
+ 
+# Iterate over
+while [ -n "${A}" ]; do I="${A%%:*}"; echo "${I}"; A="${A :}"; done
+##############################################################################
+# Check if a folder exists
+
+DIR="/etc"
+if [ -d $DIR ]; then
+echo "Folder ${DIR} exists"
+else
+echo "Folder ${DIR} does NOT exists"
+fi
+##############################################################################
+# Check to see if the user running the script is root
+# check, root, run as root, run script as root.
+# If you have a script that must be run as the root user, put this at the top:
+# make sure the one running the script is root. it is meant to be put
+# at the top of some bash script.
+#!/bin/bash
+#Test if user is root
+ 
+if [ "$(id -u 2>/dev/null)" != "0" ]; then
+echo "ERROR: $0 must be run as root" >&2
+exit 1
+fi
+##############################################################################
+# remove all symlinks in a directory, but leave the target files.
+
+find . -maxdepth 1 -type l -exec rm -f {} \;
+##############################################################################
+# rename all files in subdirectories from .cpp to .c
+
+find . -type f -name '*.cpp' | while read filename; do mv -v "${filename}" "`echo "${filename}" | sed -e 's/\.cpp$/\.c/'`"; done
+
+##############################################################################
+# Check if a file exists
+
+FILE="/etc/hosts"
+if [ -f $FILE ]; then
+echo "File ${FILE} exists"
+else
+echo "File ${FILE} does NOT exists"
+fi
+##############################################################################
+# find and List files containing a certain string
+
+find . -type f -name "*.file" | xargs grep -l "STRING"
+##############################################################################
+# Find and List files not containing a certain string
+
+find . -type f -name "*.file" | xargs grep -L "STRING"
+
+##############################################################################
+# Convert file encoding recursively
+
+iconv -l 
+
+find /Path/To/Files -name \*.xxx -type f | \
+(while read file; do
+iconv -f ISO-8859-1 -t UTF8 "$file" > "${file%.xxx}-utf8.xxx";
+done);
+##############################################################################
+# git delete, cancel, commit, remove commit, git remove commit, reset commit, undo commit.
+
+git reset --hard 
+##############################################################################
+# website monitoring
+# This will curl every 10 seconds news.thesite.com and look for Awesomestring in it, 
+# if it's there, the output will play a music file through xargs. If watch is not installed on your system, install it with brew.
+
+watch -n10 "curl http://news.thesite.com | grep Awesomestring | xargs -I % /usr/bin/afplay ~/Music/my.mp3"
+##############################################################################
+# do a http post with a json body.
+curl -v -H "Content-Type: application/json" -X POST -d '{ "param1": "one", "param2": "two"}' http://yoursite
+##############################################################################
+# List out all your Zombie processes, idle processes, idle process.
+
+ps -el | grep 'Z'
+##############################################################################
+# show all users in the system.
+
+cat /etc/passwd | cut -d: -f1
+##############################################################################
+# Restore file & folder default permissions
+
+find . -type f -exec chmod 644 {} \;
+find . -type d -exec chmod 755 {} \;
+##############################################################################
+# Extract tar archive to specified location
+
+tar -cvvf archive.tar /pathtoextract
+##############################################################################
+# TAR - Tar several files
+# create a tarball, add files to a tarball, make a tarball.
+# compress with tar.
+tar -czf logs.tar.gz ejabberd.log erlang.log muc.log
+##############################################################################
+# format usb drive.
+
+fdisk -l
+# -c option checks for bad sector
+mkfs -t ext3 -c /dev/sde1
+##############################################################################
+# bash for loop, bash loop
+
+for VARIABLE in 1 2 3 4 5 .. N
+do
+command1
+command2
+commandN
+done
+ 
+ 
+### For within a range, but only when the limits are constants
+ 
+#!/bin/bash
+for i in {1..5}
+do
+echo "Welcome $i times"
+done
+ 
+###
+ 
+### A traditional numeric loop
+ 
+#!/bin/bash
+limit=5
+for (( c=1; c<=$limit; c++ ))
+do
+echo "Welcome $c times..."
+done
 
