@@ -1261,4 +1261,10 @@ for (( c=1; c<=$limit; c++ ))
 do
 echo "Welcome $c times..."
 done
+##############################################################################
+# soft, symbolic, link, file.
+# example:
+# sudo ln -s /opt/messengerfordesktop/messengerfordesktop /usr/sbin
+
+ln -s <origin> <destin>
 
