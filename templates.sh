@@ -1267,4 +1267,36 @@ done
 # sudo ln -s /opt/messengerfordesktop/messengerfordesktop /usr/sbin
 
 ln -s <origin> <destin>
+##############################################################################
+# update, pacman, mirrorlist
+# generate the mirrorlist at https://www.archlinux.org/mirrorlist/
+# copy to the mirrorlist file.
+
+vy /etc/pacman.d/mirrorlist
+pacman -Syyu
+##############################################################################
+# check, test, if package is installed
+# pacman -Qi gpgme
+pacman -Qi <package>
+##############################################################################
+# pacman, fix, broken, package pgp, signature, issues.
+# i have got issues with gnupg
+# when updating arch and a i had a blackout
+# i have got files spreaded and it kept failing
+# to install things with pacman, i had to force install gnupg.
+# then remove 
+pacman -S --force gnupg
+rm -fr /etc/pacman.d/gnupg
+
+# and pupulate it again.
+pacman-key --init
+pacman-key --populate archlinux
+
+# then install archlinux-keystring.
+pacman -S archlinux-keyring
+
+# update the system.
+pacman -Syu
+
+
 
