@@ -1,3 +1,4 @@
+# Not runnable snippets/templates.
 ##############################################################################
 # setup, init, start, config, configuration, git, email, name, settings.
 
@@ -95,117 +96,10 @@ dd if=<iso> of=/dev/<usb-device> bs=4M;sync
 exit
 
 ##############################################################################
-# variable, iterate, incremente, loop, for, display, files, variable. list, bash.
-
-# iterate over files in a dir and increase a counter.
-# maps the ~ files to numbers.
-
-i = 0;
-for item in $(ls) 
-do
-    echo "$((i++))"
-done
-
-
-##############################################################################
-# test, check, perform, equality, if, else, or, operator, bash.
-
-# condition using or, -o stands for or.
-if [ 1 -eq 2 -o 1 -eq 1 ] ;
-then
-echo 'either 1 = 2 or 1 = 1'
-fi
-##############################################################################
-# iterate, loop, variable, count, random, c like for, bash.
-
-# generating random numbers with a c like statement.
-for (( i=1; i <= 5; i++ ))
-do
- echo "Random number $i: $RANDOM"
-done
-
-##############################################################################
-# infinite loop, endless loop, for, bash.
-
-i=1;
-for (( ; ; ))
-do
-   sleep $i
-   echo "Number: $((i++))"
-done
-##############################################################################
-
-# iterate, loop, create, list, numbers, bash.
-# iterate over a list of numbers.
-for num in {1..10}
-do
-    echo "$num"
-done
-
-##############################################################################
-# iterate, over, create, number, list, with increment, bash
-
-# iterate over a list of numbers with increment.
-for num in {1..10..3}
-do
-    echo "$num"
-done
-
-##############################################################################
 # export, set, define, variable, environment, bash.
 # export a variable to env, bash.
-export FOO=10
+export <variable>=10
 env
-##############################################################################
-# export, define, set, function, environment, bash.
-
-# it defines a function in bash then exports to environment.
-
-function alpha() {
-    echo 'Alpha Wolf'
-
-}
-
-
-export -f alpha
-env | grep alpha
-
-# the function alpha will be available to the environment.
-# call, execute, function, bash.
-alpha
-##############################################################################
-# set, define, variable, execute, eval, variable, code, bash.
-export TETHA="ls"
-echo `eval $TETHA`
-##############################################################################
-# restrict, set, array, list, readonly, bash.
-
-# restrict an array as readonly.
-readonly -a shells=("ksh" "bash" "sh" "csh" );
-
-# access, array, list, element, bash.
-# show, check, list, get, array, length.
-# shows the number of elements in the array aka length.
-echo ${#shells[@]}
-
-# the @ stands for 'all' elements. if it is given just
-echo ${shells}
-
-# it would print just the first element.
-# same about.
-echo $shells
-
-# copy, backup, array, list, bash.
-alpha="${shells[@]}"
-echo $alpha
-##############################################################################
-# check, show, access, script, args, argument, bash.
-# it tests positional arguments.
-# if no argument is given then the msg is print.
-if test -z $1
-then
-        echo "The positional parameter \$1 is empty"
-fi
 
 ##############################################################################
 # mount, usb, pendrive, device.
@@ -215,14 +109,6 @@ fdisk -l
 mount -o rw /dev/sdb[number] /mnt
 umount /dev/sdb[number]
 exit
-##############################################################################
-cd /tmp
-# generate, table of contents.
-# get the release at.
-# https://github.com/ekalinin/github-markdown-toc.go/releases
-
-tar -zxvf <release>
-mv <release> ~/bin
 ##############################################################################
 # write, text, on, image.
 # example:
@@ -234,14 +120,13 @@ convert -list font
 convert -font helvetica -fill blue -pointsize 40 -draw "text <x0>,<y0> '<text0>'" -draw "text <x1>,<y1> '<text1>'" <input>.jpg <output>.jpg
 
 ##############################################################################
-
 # install, package, nodejs, npm, global, root, superuser.
 
 npm install -g <package>
 ##############################################################################
 # remove, delete, uninstall, package, nodejs, npm, global, root, superuser.
 
-npm uninstall -g jshint
+npm uninstall -g <package>
 ##############################################################################
 # unpack, tar.bz2, files.
 
@@ -327,10 +212,6 @@ python manage.py collectstatic
 # 
 # Use a web server of your choice to serve the files. Deploying static files covers some common deployment strategies for static files.
 ##############################################################################
-# list, all, users, account, properties, linux.
-
-sudo passwd -Sa
-##############################################################################
 # add, new, user, create, linux.
 
 useradd -m -g <initial_group> -G <additional_groups> -s <login_shell> <username>
@@ -355,33 +236,9 @@ useradd -m -g <initial_group> -G <additional_groups> -s <login_shell> <username>
 # -s defines the path and file name of the user's default login shell. 
 # After the boot process is complete, the default login shell is the one specified here. 
 # Ensure the chosen shell package is installed if choosing something other than Bash.
-##############################################################################
 cut -d: -f1 /etc/group
 
 usermod -aG additional_groups username
-##############################################################################
-# set, config, wm, run, to, startx.
-
-# reference: https://wiki.archlinux.org/index.php/xinitrc
-
-# If .xinitrc is present in a user's home directory, startx and xinit execute it. Otherwise startx will run the default /etc/X11/xinit/xinitrc.
-# Note: Xinit has its own default behaviour instead of executing the file. See man 1 xinit for details.
-# This default xinitrc will start a basic environment with Twm, xorg-xclock and Xterm (assuming that the necessary packages are installed). Therefore, to start a different window manager or desktop environment, first create a copy of the default xinitrc in home directory:
-
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
-
-# should call exec <wm> in the file below.
-vy ~/.xinitrc
-##############################################################################
-# function, arguments, bash.
-
-function <name> {
-    echo "arg1 $1 arg2 $2 arg3 $3"
-
-}
-
-# calling the function.
-<name> <arg0> <arg1> <arg2>
 ##############################################################################
 # set, default, application, by, with, mimetype, xdg-open, xdg-mime.
 
@@ -419,12 +276,14 @@ convert <example.png> -resize <value0>x<value0> <example.png>
 # python manage.py runserver 0.0.0.0:8000
 python manage.py runserver 0.0.0.0:<port>
 ##############################################################################
-# show, message, dzen.
+# show, message, dzen, for, period, timeout, time.
 # example.
-(echo "This is a message"; sleep 10) | dzen2 -bg darkred -fg grey80 -fn fixed 
+# (echo "<message>"; sleep 1) | dzen2 -bg darkred -fg grey80 -fn fixed 
+
+(echo "<message>"; sleep <timeout>) | dzen2 -bg darkred -fg grey80 -fn fixed 
 ##############################################################################
 # schedule, month, remind with dzen.
-(echo Monthly Schedule; remind -c1 -m) | dzen2 -l 52 -w 410 -p -fn lime -bg '#e0e8ea' -fg black -x 635
+echo Monthly Schedule; remind -c1 -m) | dzen2 -l 52 -w 410 -p -fn lime -bg '#e0e8ea' -fg black -x 635
 
 # Horizontal menu without any files.
 (echo Menu; echo -e "xterm\nxclock\nxeyes\nxfontsel") | dzen2 -l 4 -m h -p
@@ -452,32 +311,7 @@ Type=Application
 update-desktop-database ~/.local/share/applications
 update-mime-database    ~/.local/share/mime
 
-##############################################################################
-# dzen2, menu.
 
-* Display message and timeout after 10 seconds:
-    (echo "This is a message"; sleep 10) | dzen2 -bg darkred -fg grey80 -fn fixed 
-
-
-* Display message and never timeout:
-    echo "This is a message"| dzen2 -p
-
-
-* Display updating single line message:
-    for i in $(seq 1 20); do A=${A}'='; print $A; sleep 1; done | dzen2
-
-
-* Display header and a message with multiple lines:
-    (echo Header; cal; sleep 20) | dzen2 -l 8
-
-    Displays "Header" in the title window and the output of cal in the 8
-    lines high slave window.
-
-
-* Display updating messages:
-    (echo Header; while true; do echo test$((i++)); sleep 1; done) | dzen2 -l 12
-
-    The slave window will update contents if new input has arrived.
 ##############################################################################
 # find, locate, package, files, pacman.
 
@@ -510,7 +344,7 @@ chsh -s <full-path-to-shell>
 # the command below cuts the video from the position 00:00:30 to the position 00:00:35
 # ffmpeg -i [input_file] -ss [start_seconds] -t [duration_seconds] [output_file]
 
-ffmpeg -ss 00:00:30 -i orginalfile -t 00:00:05 -vcodec copy -acodec copy newfile
+ffmpeg -ss 00:00:30 -i <orginalfile> -t 00:00:05 -vcodec copy -acodec copy <newfile>
 ##############################################################################
 # search, research, find, text, string, dir, files, recursive, recursively, folder, all, grep, locate.
 # example grep -r -l "foo" .
@@ -518,7 +352,7 @@ ffmpeg -ss 00:00:30 -i orginalfile -t 00:00:05 -vcodec copy -acodec copy newfile
 grep -r -l "<string>" <folder>
 ##############################################################################
 # delete, commit.
-git reset --hard 602f5ad
+git reset --hard <commit>
 git push origin HEAD --force
 ##############################################################################
 # create, make, instantiate, run, virtualenv, pythonywhere.
@@ -535,7 +369,7 @@ pacman -Ss <name>
 ##############################################################################
 # record, video, desktop, ffmpeg, with, audio.
 
-ffmpeg -f alsa -i default -f x11grab -s 1366x768 -r 30 -i :0.0 -qscale 0 filename.avi
+ffmpeg -f alsa -i default -f x11grab -s 1366x768 -r 30 -i :0.0 -qscale 0 <filename.avi>
 ##############################################################################
 # capture, record, video, deskto, ffmpeg, without, audio, low, quality.
 # low quality.
@@ -545,42 +379,8 @@ ffmpeg  -f x11grab -s 1366x768 -r 30 -i :0.0 -qscale 0 filename.avi
 ffmpeg -f x11grab -r 25 -s 1280x720 -i :0.0+0,24 -vcodec libx264 -threads 0 <video.mkv>
 ##############################################################################
 # capture, record, video, desktop, ffmpeg, without, audio, high, audio, quality, with.
-ffmpeg -f alsa -i default -f x11grab -r 25 -s 1280x720 -i :0.0+0,24 -acodec pcm_s16le -vcodec libx264 -threads 0 output.mkv
-##############################################################################
-# update, arch, packages, system, whole, OS, os, apps, programs.
+ffmpeg -f alsa -i default -f x11grab -r 25 -s 1280x720 -i :0.0+0,24 -acodec pcm_s16le -vcodec libx264 -threads 0 <output.mkv>
 
-sudo pacman -Syu
-y
-##############################################################################
-# install, i3, archlinux, setup, configure.
-
-pacman -S xorg-xinit
-pacman -S i3
-pacman -S dmenu
-pacman -S xterm
-
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
-
-# Make i3 be started after:
-# startx
-
-echo 'exec i3' >> ~/.xinitrc
-##############################################################################
-# control, play, set, move, cursor, mouse, from, command, line, cli, send, keysstrokes, emulate, pressed.
-# install xdotool, controls your mouse, permits you to set regex
-# to search for window tittles.
-
-# sends a click on the mouse positon.
-xdotool click 1
-
-# moves the mouse to 0 0.
-xdotool mousemove 0 0
-
-# moves the mouse to 0 0 then clicks.
-xdotool mousemove 0 0 click 1
-
-# send alt+2 keypress.
-xdotool key alt+2
 ##############################################################################
 # create, new, branch, from, existing commit, git, make.
 cd <project>
@@ -637,9 +437,6 @@ FONT=lat9w-16
 # example:
 # xrandr --output LVDS1 --brightness 0.7
 
-xrandr --output LVDS1 --brightness 0.7
-##############################################################################
-
 xrandr --output LVDS1 --brightness <value>
 ##############################################################################
 # place, set, setup, i3, config, two monitors, screens.
@@ -657,7 +454,7 @@ espeak -v <lang> <"word">
 # install, pip, package, specific, version.
 # exaple:
 # pip2 install -U django==1.9.6
-pip install -U package==version
+pip install -U <package>==<version>
 ##############################################################################
 # check, view, python, package, version, pip.
 pip2 freeze | grep <package>
@@ -703,7 +500,7 @@ sudo systemctl enable myscript.service
 ##############################################################################
 # read, view, tar, gz, compressed, files.
 
-zless filename
+zless <filename>
 ##############################################################################
 # pip, install, requirements, files.
 
@@ -714,39 +511,6 @@ pip install -r <file>
 # when calling startx as root from i3 it will turn .Xauthority ownership to root.
 
 # in order to fix it just remove .Xauthority* files.
-##############################################################################
-# read, check, view, open, mimeapps, xdg, list, applications, default.
-# view the default applications used to open filetypes based on mimetypes.
-vy ~/.local/share/applications/mimeapps.list
-vy ~/.local/share/applications/desktop-mimeapps.list
-vy ~/.local/share/applications/chrome-app-list.desktop 
-##############################################################################
-
-
-# dzen2, menu.
-
-* Display message and timeout after 10 seconds:
-(echo "This is a message"; sleep 10) | dzen2 -bg darkred -fg grey80 -fn fixed 
-
-
-* Display message and never timeout: with number of lines limited to 3.
-echo 'This is a message e'| dzen2 -p -bg yellow -fg black -l 3
-
-* Display updating single line message:
-    for i in $(seq 1 20); do A=${A}'='; print $A; sleep 1; done | dzen2
-
-
-* Display header and a message with multiple lines:
-    (echo Header; cal; sleep 20) | dzen2 -l 8
-
-    Displays "Header" in the title window and the output of cal in the 8
-    lines high slave window.
-
-
-* Display updating messages:
-    (echo Header; while true; do echo test$((i++)); sleep 1; done) | dzen2 -l 12
-
-    The slave window will update contents if new input has arrived.
 ##############################################################################
 # send, directory to host machine with scp.
 
@@ -816,27 +580,11 @@ streamer -q -c /dev/video -s 300x400 s  -b 16 -o <file.jpg>
 ##############################################################################
 # transform convert png into gif.
 
-convert SMFPress.png -channel Alpha -threshold 80% -resize 120x120 thumbnail.gif
-convert img.png -channel Alpha  thumbnail.gif
-##############################################################################
-# show, view, check, cpu, architecture.
+# resize
+convert <input.png> -channel Alpha -threshold 80% -resize 120x120 <output.gif>
 
-lscpu
-
-# Architecture:          i686
-# CPU op-mode(s):        32-bit, 64-bit
-# CPU(s):                2
-# Thread(s) per core:    1
-# Core(s) per socket:    2
-# CPU socket(s):         1
-# Vendor ID:             GenuineIntel
-# CPU family:            6
-# Model:                 23
-# Stepping:              10
-# CPU MHz:               2493.742
-# L1d cache:             32K
-# L1i cache:             32K
-# L2 cache:             2048K
+# dont resize.
+convert <input.png> -channel Alpha  <output.gif>
 ##############################################################################
 # running logkeys, tests.
 logkeys -s --no-daemon -o foo --no-func-keys --no-timestamp
@@ -874,35 +622,16 @@ unzip -P <password> <file.zip>
 # zip, folder, pack.
 
 zip -r <file.zip> <folder>
+
+
 ##############################################################################
-
-# generate ssh keygen, github ssh-keygen, ssh key
-
-echo '' > ~/.ssh/known_hosts
-
-ssh-keygen -t rsa -C `askpass`
-
-y
-ls -la ~/.ssh/id_rsa
-
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-vy ~/.ssh/id_rsa.pub
-# Copy the key then add to git hub.
-
-# Test if it is working then input the passphrase.
-ssh -T git@github.com
-
 # take, get, screenshot, imagemagick.
-##############################################################################
-# install imagemagick.
-sudo pacman -S imagemagick
 
-import -window root -quality 100 -silent "/tmp/screenshot-`date +%F[%R]`.jpg"
+import -window root -quality 100 -silent <file.jpg>
 
 # take, screenshot, get, after, delay, vy.
 
-sleep 4; import -window root -quality 100 -silent "/tmp/screenshot-`date +%F[%R]`.jpg"
+sleep 4; import -window root -quality 100 -silent <file.jpg>
 ##############################################################################
 # obtain get list of last upgraded packages arch linux.
 # Example:
@@ -923,15 +652,6 @@ cat /var/log/pacman.log | grep -i -e upgraded | grep <package>
 cd /var/cache/pacman/pkg/
 pacman -U <package>
 
-##############################################################################
-# downgrade all packages arch linux
-pacman -Syy
-
-pacman -Suu
-
-##############################################################################
-#list #kernel #modules #loaded
-lsmod 
 ##############################################################################
 #load #kernel #module
 modprobe <module>
@@ -955,18 +675,12 @@ echo '<user>	ALL=(ALL:ALL) ALL' >> /etc/sudoers
 # find, all, occurrences, look, pattern.
 
 grep -rl  '<pattern>' <folder>
-
-
 ##############################################################################
 # set, setting, change, python, default, prompt.
 
 echo 'import sys; sys.ps1="<token0>\n"; sys.ps2="<token1>\n"' > /home/tau/.set_py_prompt.py
 echo "export PYTHONSTARTUP=/home/tau/.set_py_prompt.py" >> /home/tau/.bashrc
 
-##############################################################################
-# install, get, download, pip, package, specific, version.
-
-sudo pip install <package>==<x.x.x>
 ##############################################################################
 # convert, markdown, to, html.
 
@@ -989,9 +703,6 @@ passwd <user>
 sudo bash -i
 lsmod | less
 ##############################################################################
-# add, install new module into the kernel.
-modprobe <module>
-##############################################################################
 # verify whether the module was installed.
 lsmod | grep <module>
 ##############################################################################
@@ -1012,12 +723,6 @@ lsof -i <protocol>:<port>
 # delete, wifi-menu, profiles.
 ls /etc/netctl
 sudo rm /etc/netctl/<profile>
-##############################################################################
-# pacman, mirror list file.
-/etc/pacman.d/mirrorlist
-##############################################################################
-# pacman, conf, pacman.conf, file.
-/etc/pacman.conf
 ##############################################################################
 # send mail, email, read email, mail.
 
@@ -1084,18 +789,7 @@ Hello, World!
 sudo bash -i
 cat first_email | sendmail -i -t
 exit
-##############################################################################
-# run python interpreter with tee, it outputs what's sent to the interpreter.
 
-tee >(python -i)
-
-# ignore interruptions/signals.
-tee -i >(python -i)
-##############################################################################
-# check, view, get, list, show, plugged, attached, inserted, device, usb, pen drive.
-sudo bash -i
-cat /var/log/kern.log
-exit
 ##############################################################################
 # ftp download example
 
@@ -1125,63 +819,25 @@ quote PASS $PASSWD
 put $FILE
 bye
 END_SCRIPT
-##############################################################################
-# arrays in posix shell, bash
 
-# Prepare array
-A=; for i in a b c d; do A="$A$i:"; done; echo $A;
- 
-# Iterate over
-while [ -n "${A}" ]; do I="${A%%:*}"; echo "${I}"; A="${A :}"; done
-##############################################################################
-# Check if a folder exists
-
-DIR="/etc"
-if [ -d $DIR ]; then
-echo "Folder ${DIR} exists"
-else
-echo "Folder ${DIR} does NOT exists"
-fi
-##############################################################################
-# Check to see if the user running the script is root
-# check, root, run as root, run script as root.
-# If you have a script that must be run as the root user, put this at the top:
-# make sure the one running the script is root. it is meant to be put
-# at the top of some bash script.
-#!/bin/bash
-#Test if user is root
- 
-if [ "$(id -u 2>/dev/null)" != "0" ]; then
-echo "ERROR: $0 must be run as root" >&2
-exit 1
-fi
 ##############################################################################
 # remove all symlinks in a directory, but leave the target files.
 
-find . -maxdepth 1 -type l -exec rm -f {} \;
+find <dir> -maxdepth 1 -type l -exec rm -f {} \;
 ##############################################################################
-# rename all files in subdirectories from .cpp to .c
+# rename all files in subdirectories from .ext0 to ext1.
 
-find . -type f -name '*.cpp' | while read filename; do mv -v "${filename}" "`echo "${filename}" | sed -e 's/\.cpp$/\.c/'`"; done
+find <dir> -type f -name '*.cpp' | while read filename; do mv -v "${filename}" "`echo "${filename}" | sed -e 's/\<ext0>/\<ext1>/'`"; done
 
-##############################################################################
-# Check if a file exists
-
-FILE="/etc/hosts"
-if [ -f $FILE ]; then
-echo "File ${FILE} exists"
-else
-echo "File ${FILE} does NOT exists"
-fi
 ##############################################################################
 # find and List files containing a certain string
+# find <dir> -type f -name "*.py" | xargs grep -l "<string>"
 
-find . -type f -name "*.file" | xargs grep -l "STRING"
+find <dir> -type f -name "<pattern>" | xargs grep -l "<string>"
 ##############################################################################
 # Find and List files not containing a certain string
 
 find . -type f -name "*.file" | xargs grep -L "STRING"
-
 ##############################################################################
 # Convert file encoding recursively
 
@@ -1192,10 +848,6 @@ find /Path/To/Files -name \*.xxx -type f | \
 iconv -f ISO-8859-1 -t UTF8 "$file" > "${file%.xxx}-utf8.xxx";
 done);
 ##############################################################################
-# git delete, cancel, commit, remove commit, git remove commit, reset commit, undo commit.
-
-git reset --hard 
-##############################################################################
 # website monitoring
 # This will curl every 10 seconds news.thesite.com and look for Awesomestring in it, 
 # if it's there, the output will play a music file through xargs. If watch is not installed on your system, install it with brew.
@@ -1205,75 +857,33 @@ watch -n10 "curl http://news.thesite.com | grep Awesomestring | xargs -I % /usr/
 # do a http post with a json body.
 curl -v -H "Content-Type: application/json" -X POST -d '{ "param1": "one", "param2": "two"}' http://yoursite
 ##############################################################################
-# List out all your Zombie processes, idle processes, idle process.
-
-ps -el | grep 'Z'
-##############################################################################
-# show all users in the system.
-
-cat /etc/passwd | cut -d: -f1
-##############################################################################
 # Restore file & folder default permissions
 
-find . -type f -exec chmod 644 {} \;
-find . -type d -exec chmod 755 {} \;
+find <dir> -type f -exec chmod 644 {} \;
+find <dir> -type d -exec chmod 755 {} \;
 ##############################################################################
 # Extract tar archive to specified location
 
-tar -cvvf archive.tar /pathtoextract
+tar -cvvf <archive.tar> <path>
 ##############################################################################
 # TAR - Tar several files
 # create a tarball, add files to a tarball, make a tarball.
 # compress with tar.
-tar -czf logs.tar.gz ejabberd.log erlang.log muc.log
+tar -czf <package.tar.gz> <file0> <file1> <file2> ...
 ##############################################################################
 # format usb drive.
 
 fdisk -l
 # -c option checks for bad sector
-mkfs -t ext3 -c /dev/sde1
-##############################################################################
-# bash for loop, bash loop
+# mkfs -t ext3 -c /dev/sde1
 
-for VARIABLE in 1 2 3 4 5 .. N
-do
-command1
-command2
-commandN
-done
- 
- 
-### For within a range, but only when the limits are constants
- 
-#!/bin/bash
-for i in {1..5}
-do
-echo "Welcome $i times"
-done
- 
-###
- 
-### A traditional numeric loop
- 
-#!/bin/bash
-limit=5
-for (( c=1; c<=$limit; c++ ))
-do
-echo "Welcome $c times..."
-done
+mkfs -t ext3 -c /dev/<dev.
 ##############################################################################
 # soft, symbolic, link, file.
 # example:
 # sudo ln -s /opt/messengerfordesktop/messengerfordesktop /usr/sbin
 
 ln -s <origin> <destin>
-##############################################################################
-# update, pacman, mirrorlist
-# generate the mirrorlist at https://www.archlinux.org/mirrorlist/
-# copy to the mirrorlist file.
-
-vy /etc/pacman.d/mirrorlist
-pacman -Syyu
 ##############################################################################
 # check, test, if package is installed
 # pacman -Qi gpgme
@@ -1285,7 +895,21 @@ pacman -Qi <package>
 # i have got files spreaded and it kept failing
 # to install things with pacman, i had to force install gnupg.
 # then remove 
-pacman -S --force gnupg
+
+# pacman -S --force gnupg
+# rm -fr /etc/pacman.d/gnupg
+# 
+# # and pupulate it again.
+# pacman-key --init
+# pacman-key --populate archlinux
+# 
+# # then install archlinux-keystring.
+# pacman -S archlinux-keyring
+# 
+# # update the system.
+# pacman -Syu
+
+pacman -S --force <package>
 rm -fr /etc/pacman.d/gnupg
 
 # and pupulate it again.
@@ -1297,14 +921,8 @@ pacman -S archlinux-keyring
 
 # update the system.
 pacman -Syu
-##############################################################################
-# list, aur, packages, only.
 
-sudo pacman -Qm
-##############################################################################
-# cpu, info, check, list, processors, speed.
 
-less /proc/cpuinfo
 
 
 
