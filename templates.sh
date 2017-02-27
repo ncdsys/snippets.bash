@@ -1297,6 +1297,11 @@ pacman -S archlinux-keyring
 
 # update the system.
 pacman -Syu
+##############################################################################
+# list, aur, packages, only.
+
+sudo pacman -Qm
+
 
 
 
