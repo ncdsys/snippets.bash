@@ -1301,7 +1301,10 @@ pacman -Syu
 # list, aur, packages, only.
 
 sudo pacman -Qm
+##############################################################################
+# cpu, info, check, list, processors, speed.
 
+less /proc/cpuinfo
 
 
 
