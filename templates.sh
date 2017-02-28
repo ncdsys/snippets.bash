@@ -922,7 +922,204 @@ pacman -S archlinux-keyring
 # update the system.
 pacman -Syu
 
+##############################################################################
+# Run command using at, run command at date, time.
 
 
+# echo "ls -l" | at midnight
+# 
+# echo "<ls>" > at 0815am Jan 24
 
+echo "<cmd>" > at <time>
+##############################################################################
+# run python as unbuffered mode, run python script unbuffered.
+
+python -u <script.py>
+
+# when it is installed.
+python -u <script>
+##############################################################################
+# absolute, complete, path, file.
+
+readlink -f <file>
+##############################################################################
+# list opened ports with nmap, opened ports with nmap.
+# list listening ports with nmap.
+nmap <address>
+
+##############################################################################
+# scan a whole subminet, scan a submit, scan a ip range, scan ips.
+nmap <x.y.z.*>
+
+##############################################################################
+# Scan a Host to check its protected by Firewall:
+# To scan a host if it is protected by any packet filtering software or Firewalls.
+
+nmap -PN 192.168.0.3
+##############################################################################
+# detect which os ip is running, get ip os, discover ip os, discover machine os, get machine os from ip.
+
+nmap -O <ip>
+
+##############################################################################
+# mount cd rom for reading.
+
+# check the mount point in /etc/fstab.
+cat /etc/fstab
+##############################################################################
+
+# mount the file system.
+sudo mount /dev/<sr0>
+##############################################################################
+
+# umount the file system.
+sudo umount /dev/<sr0>
+##############################################################################
+
+# kill the processes using the device.
+sudo fuser -k /dev/<sr0>
+
+##############################################################################
+# check, compare, integrity, md5sum, sha1sum of a file.
+sha1sum <filename>
+##############################################################################
+# setup wifi access point.
+sudo pacman -S create_ap
+create_ap <wifi-device> <wired-device> <wif-name> <wifi-passphrase>
+
+##############################################################################
+# set, change, user, home, directory.
+
+usermod -m -d </path/to/new/home/dir> <userNameHere>
+##############################################################################
+# check if environment variable exists.
+# env | grep PATH
+
+env | grep <name>
+##############################################################################
+# check, list, number, times, command, performed.
+# hash keeps a hash table of commands used in the shell
+# as well as the number of times it was hit.
+hash | grep <command>
+
+# it deletes the command from the hash.
+hash -d <command>
+##############################################################################
+# fix, set, config, time, archlinux.
+# sudo timedatectl set-time "03:12:10"
+
+sudo timedatectl set-time "<hour:minute:second>"
+##############################################################################
+# detect, movement, around, check, record, video, intruser, guest.
+# set up motion detect.            
+
+sudo pacman -S motion
+vy /etc/motion/motion.conf
+
+# file where the videos are in.
+# /var~/projects/motion
+# set the values below to off.
+# daemon off
+# output_pictures off
+##############################################################################
+# count, files, dirs, in a dir.
+ls -1 <dir> | wc -l
+##############################################################################
+# a windows thing.
+# set, python, path, windows, command-line, recognize, find.
+set path=%path%;C:\Python27\
+
+# set the path permanently, windows.
+# setx PATH "%PATH%;C:\Python27\"
+
+
+##############################################################################
+# highlight, pygment, html, code.
+
+pygmentize -f html -O full,style=<style> -o <output.html> \
+<input>
+##############################################################################
+# write, archlinux, iso, usb, image, disk.
+
+cd /home/tau/Downloads
+
+# check device.
+fdisk -l
+
+# Example.
+# dd bs=4M if=archlinux-2016.02.01-dual.iso of=/dev/sdb;sync
+
+dd bs=4M if=<archlinux.iso> of=/dev/<device>;sync
+##############################################################################
+# update, PATH, environment.
+
+export PATH=$PATH:<dir>
+##############################################################################
+# set, default, editor, pick, config.
+
+export EDITOR="<path>"
+##############################################################################
+# kernel, module, info, description.
+modinfo <module>
+##############################################################################
+# generate, create, get, certificate, key, ssl.
+
+openssl genrsa -des3 -out arcamens.key 1024
+arcamens
+
+openssl req -new -key arcamens.key -out arcamens.csr
+arcamens
+BR
+rio de janeiro
+rio das ostras
+arcamens
+iury
+ioliveira@id.uff.br
+arcamens
+arcamens
+
+openssl x509 -req -days 365 -in arcamens.csr -signkey arcamens.key -out arcamens.crt
+arcamens
+##############################################################################
+# reset, mysql, password, root, forgot, missed, change.
+
+# Resetting the root password of a MySQL database is trivial if you know the current password if you don't it is a little tricker. Thankfully it isn't too difficult to fix, and here we'll show one possible way of doing so.
+# If you've got access to the root account already, because you know the password, you can change it easily:
+
+mysql --user=root --pass mysql
+update user set Password=PASSWORD('new-password-here') WHERE User='root';
+flush privileges;
+exit
+
+# However if you don't know the current password this approach will not work - you need to login to run any commands and without the password you'll not be able to login!
+# 
+# Thankfully there is a simple solution to this problem, we just need to start MySQL with a flag to tell it to ignore any username/password restrictions which might be in place. Once that is done you can successfully update the stored details.
+# 
+# First of all you will need to ensure that your database is stopped:
+
+/etc/init.d/mysql stop
+# Now you should start up the database in the background, via the mysqld_safe command:
+
+# root@steve:~# /usr/bin/mysqld_safe --skip-grant-tables &
+# [1] 6702
+# Starting mysqld daemon with databases from /var~/projects/mysql
+# mysqld_safe[6763]: started
+# Here you can see the new job (number "1") has started and the server is running with the process ID (PID) of 6702.
+# 
+# Now that the server is running with the --skip-grant-tables flag you can connect to it without a password and complete the job:
+
+mysql -n --user=root --password=`ssh-askpass` --table
+
+update user set Password=PASSWORD('new-password-here') WHERE User='tau';
+flush privileges;
+exit
+
+# Now that you've done that you just need to stop the server, so that you can go back to running a secure MySQL server with password restrictions in place. First of all bring the server you started into the foreground by typing "fg", then kill it by pressing "Ctrl+c" afterwards.
+# 
+# This will now allow you to start the server:
+
+/etc/init.d/mysql start
+# Now everything should be done and you should have regained access to your MySQL database(s); you should verify this by connecting with your new password:
+
+exit
 
