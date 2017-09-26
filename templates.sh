@@ -1135,6 +1135,13 @@ exit
 ##############################################################################
 # record wav/sounds on linux, wav.
 arecord -vv -f cd test.wav
+##############################################################################
+# store multiline string in variabe.
 
+read -d '' e<<STR
+value
+STR
+
+echo $e
 
 
