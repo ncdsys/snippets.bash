@@ -10,15 +10,16 @@ fdisk -l
 
 # create partition
 
-fdisk /dev/<dev>
+fdisk /dev/sdb
 # delete partitions partition.
 d
 
 # partition numbers.
 1
 2
+o
 
-# create the partition as msdos.
+# create the partition
 o 
 
 # write the changes to disk
@@ -26,20 +27,21 @@ w
 
 
 # format the partition
-mkfs.vfat /dev/<dev>
+mkfs.vfat /dev/sdb
 
 mkdir /mnt/usb
 
 # mount the partition.
 
 fdisk -l
-mount -o rw /dev/<dev> /mnt/usb
+mount -o rw /dev/sdb /mnt/usb
 
 # show mounted partitions.
 mount -l
 
 # umount the partition.
-umount /dev/<dev>
+umount /dev/sdb
+
 
 
 

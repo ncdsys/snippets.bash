@@ -7,3 +7,9 @@
 
 lsof -i <protocol>:<port>
 
+sudo bash -i
+
+# examples:
+# lsof -i tcp:1883
+# lsof -i tcp:15675
+
