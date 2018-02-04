@@ -1,5 +1,5 @@
 ##############################################################################
-#record #extract #unpack #burn #iso images #to usb #storage #pen #drive #debian
+# burn linux distro iso to pen drive/usb.
 
 sudo bash -i
 
@@ -11,4 +11,5 @@ ls
 # IT HAS TO BE /dev/sdb not /dev/sdb1.
 dd if=<iso> of=/dev/<usb-device> bs=4M;sync
 exit
+
 
